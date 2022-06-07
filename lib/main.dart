@@ -9,8 +9,8 @@ import 'package:get/get.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await GlobalServices.initService();
   await Storage.init();
+  await GlobalServices.initService();
   runApp(const MyApp());
 }
 
@@ -44,12 +44,12 @@ class MyApp extends StatelessWidget {
               Locale('es', ''), // Spanish, no country code
               Locale('zh', 'CN'), // Chinese, no country code
             ],
-            fallbackLocale: const Locale("zh", "CN"),
+            fallbackLocale: LanguageController.to.local,
             navigatorObservers: [routeObserver],
             initialBinding: BindingsBuilder(() => [
               Get.put(AuthService()),
             ]),
-            locale: const Locale('zh', 'CN'), // Chinese, no country code,
+            locale: LanguageController.to.local, // Chinese, no country code,
             theme: !state.isDark ? LightTheme.to : DarkTheme.to,
         );
       }

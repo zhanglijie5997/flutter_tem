@@ -43,7 +43,7 @@ class ThemeController extends GetxController {
   /// * [value] bool true -> light  fasle -> dark
   void changeMode(value) {
     _isDark = value;
-    Storage.to.write("theme", _isDark);
+    Storage.to.write(StorageEnum.theme, _isDark);
     // 修改状态栏
     SystemUiOverlayStyle uiStyle = SystemUiOverlayStyle.light.copyWith(
       statusBarColor: Colors.black,
