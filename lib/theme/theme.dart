@@ -1,3 +1,4 @@
+import 'package:app_3/storage/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -36,13 +37,13 @@ class DarkTheme {
 
 class ThemeController extends GetxController {
   static ThemeController get to => Get.find<ThemeController>();
-  bool _isDark = false;
+  bool _isDark = Storage.to.read("theme") ?? false;
   get isDark => _isDark;
-
   /// 修改主题
   /// * [value] bool true -> light  fasle -> dark
   void changeMode(value) {
     _isDark = value;
+    Storage.to.write("theme", _isDark);
     // 修改状态栏
     SystemUiOverlayStyle uiStyle = SystemUiOverlayStyle.light.copyWith(
       statusBarColor: Colors.black,
@@ -55,6 +56,11 @@ class ThemeController extends GetxController {
     }
     SystemChrome.setSystemUIOverlayStyle(uiStyle);
     update();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
   }
 }
 
